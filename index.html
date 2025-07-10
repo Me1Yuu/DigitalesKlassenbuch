@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digitales Klassenbuch</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="sidebar">
+        <div class="logo">
+            <img src="lug logo.png" alt="" class="logo-icon">
+            <div class="logo-text">Digitales<br>Klassenbuch</div>
+        </div>
+        <div class="nav-items">
+            <div class="nav-item">
+                <div class="nav-icon"></div>
+                <span>Startseite</span>
+            </div>
+            <div class="nav-item active">
+                <div class="nav-icon"></div>
+                <span>Übersicht</span>
+            </div>
+            <div class="nav-item">
+                <div class="nav-icon"></div>
+                <span>Eintrag</span>
+            </div>
+            <div class="nav-item">
+                <div class="nav-icon"></div>
+                <span>Kalender</span>
+            </div>
+            <div class="nav-item">
+                <div class="nav-icon"></div>
+                <span>Einstellungen</span>
+            </div>
+        </div>
+        <div class="logout">
+            <div class="nav-icon"></div>
+            <span>Ausloggen</span>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <div class="header">
+            <div class="date-time">06.05.2025</div>
+            <div class="date-time">13:10</div>
+            <div class="sun-icon"></div>
+        </div>
+
+        <div class="content-area">
+            <div class="user-info">
+                <div class="user-left">
+                    <div class="user-avatar">MM</div>
+                    <div class="user-name">Max Mustermann</div>
+                    <div class="user-role">AE / SI Trainer</div>
+
+                    <!-- Erinnerung AN oder AUS -->
+                    <div class="status">
+                        <div class="status-indicator"></div>
+                        <span>AUS</span>
+                    </div>
+                     
+                </div>
+                <div class="user-right">
+                    <div class="info-sections">
+                        <div class="info-section">
+                            <div class="section-title">Kurse</div>
+                            <div class="course-item">FI 21-1 - AE</div>
+                            <div class="course-item">FI 23-3 - SI</div>
+                        </div>
+                        <div class="info-section">
+                            <div class="section-title">Fachinhalte</div>
+                            <div>Netzwerke</div>
+                            <div>IT-Grundlagen</div>
+                        </div>
+                    </div>
+
+                    <div class="schedule-item">
+                        <div class="schedule-time">Heutiger Ablauf 8:30 - 16:30</div>
+                        <div style="margin-top: 10px;">
+                            <div style="background-color: #e8f5e8; padding: 5px; border-radius: 3px; margin-bottom: 5px;">
+                                <div style="font-size: 10px; color: #666;">Fachrichtung</div>
+                                <div style="font-weight: bold; color: #333;">Grundlagen</div>
+                            </div>
+                            <div style="background-color: #ffebee; padding: 5px; border-radius: 3px; margin-bottom: 5px;">
+                                <div style="font-size: 10px; color: #666;">Kurs</div>
+                                <div style="font-weight: bold; color: #333;">FI 23-3</div>
+                            </div>
+                            <div style="background-color: #e3f2fd; padding: 5px; border-radius: 3px;">
+                                <div style="font-size: 10px; color: #666;">Fachinhalt</div>
+                                <div style="font-weight: bold; color: #333;">HTML/CSS/JS</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="entries-section">
+                <div class="entries-container">
+                    <div class="entries-title">Aktuelle Einträge</div>
+                    <div class="entry-item">
+                        <div class="entry-avatar" style="background-color: #2196f3;">HH</div>
+                        <div class="entry-content">
+                            <div class="entry-header">
+                                <div class="entry-author">Coach</div>
+                                <div class="entry-time">15:45 Uhr - 06.05.2025</div>
+                            </div>
+                            <div class="entry-text">
+                                Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum
+                            </div>
+                            <div class="entry-tags">
+                                <span class="entry-tag tag-ae">AE</span>
+                                <span class="entry-tag tag-fi">FI 23-3</span>
+                                <span class="entry-tag tag-html">HTML/CSS/JS</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="entry-item">
+                        <div class="entry-avatar" style="background-color: #8bc34a;"></div>
+                        <div class="entry-content">
+                            <div class="entry-header">
+                                <div class="entry-author">AE / SI Trainer</div>
+                                <div class="entry-time"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="entry-item">
+                        <div class="entry-avatar" style="background-color: #8bc34a;"></div>
+                        <div class="entry-content">
+                            <div class="entry-header">
+                                <div class="entry-author">SI Trainer</div>
+                                <div class="entry-time"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="entry-item">
+                        <div class="entry-avatar" style="background-color: #8bc34a;">MM</div>
+                        <div class="entry-content">
+                            <div class="entry-header">
+                                <div class="entry-author">AE / SI Trainer</div>
+                                <div class="entry-time">15:00 Uhr - 06.05.2025</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="entries-container">
+                    <div class="entries-title">Letzter Eintrag</div>
+                    
+                    <div class="last-entry-item">
+                        <div class="last-entry-avatar"></div>
+                        <div class="last-entry-content">
+                            <div class="last-entry-name">Max Mustermann (Trainer)</div>
+                            <div class="last-entry-course">FI 23-4<br>Netzwerke Grundlagen</div>
+                        </div>
+                        <div class="last-entry-time">05.05.2025<br>15:00 Uhr</div>
+                    </div>
+
+                    <div class="last-entry-item">
+                        <div class="last-entry-avatar"></div>
+                        <div class="last-entry-content">
+                            <div class="last-entry-name">Max Mustermann (Trainer)</div>
+                            <div class="last-entry-course">FI 23-4<br>Netzwerke Grundlagen</div>
+                        </div>
+                        <div class="last-entry-time">05.05.2025<br>12:21 Uhr</div>
+                    </div>
+
+                    <div class="last-entry-item">
+                        <div class="last-entry-avatar"></div>
+                        <div class="last-entry-content">
+                            <div class="last-entry-name">Max Mustermann (Trainer)</div>
+                            <div class="last-entry-course">FI 23-4<br>Netzwerke Grundlagen</div>
+                        </div>
+                        <div class="last-entry-time">04.05.2025<br>16:00 Uhr</div>
+                    </div>
+
+                    <div class="last-entry-item">
+                        <div class="last-entry-avatar"></div>
+                        <div class="last-entry-content">
+                            <div class="last-entry-name">Max Mustermann (Trainer)</div>
+                            <div class="last-entry-course">FI 23-4<br>Netzwerke Grundlagen</div>
+                        </div>
+                        <div class="last-entry-time">03.05.2025<br>17:01 Uhr</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
