@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="profil.css">
+    <title>Profile</title>
+</head>
+<body>
+      <div class="sidebar">
+        <div class="logo">
+            <img src="lug logo.png" alt="" class="logo-icon">
+            <div class="logo-text">Digitales<br>Klassenbuch</div>
+        </div>
+        <div class="nav-items">
+            <a href="index.html" class="nav-item">
+                <div class="nav-icon"></div>
+                <span>Startseite</span>
+            </a>
+             <a href="profil.html" class="nav-item active">
+                <div class="nav-icon"></div>
+                <span>Profil</span>
+            </a>
+            <a href="verwaltung.html" class="nav-item active">
+                <div class="nav-icon"></div>
+                <span>Verwaltung</span>
+            </a>
+            <div class="nav-item">
+                <div class="nav-icon"></div>
+                <span>Eintrag</span>
+            </div>
+            <div class="nav-item">
+                <div class="nav-icon"></div>
+                <span>Kalender</span>
+            </div>
+            <a href="einstellung.html" class="nav-item">
+                <div class="nav-icon"></div>
+                <span>Einstellungen</span>
+            </a>
+        </div>
+        <div class="logout">
+            <div class="nav-icon"></div>
+            <span>Ausloggen</span>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Page Header -->
+        <div class="page-header">
+            <div class="trainer-info">
+                <div class="trainer-avatar">MF</div>
+                <div class="trainer-details">
+                    <h1>Max Mustermann</h1>
+                    <p>Trainer • Mathematik, Physik • Seit 2020</p>
+                </div>
+            </div>
+            <div class="header-actions">
+                <div class="notification-bell">🔔</div>
+                <button class="btn btn-outline">Profil bearbeiten</button>
+                <button class="btn btn-primary">Neuer Bericht</button>
+            </div>
+        </div>
+
+        <!-- Statistik Übersicht -->
+        <div class="stats-overview">
+            <div class="stat-card">
+                <div class="stat-number">8</div>
+                <div class="stat-label">Aktive Kurse</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">145</div>
+                <div class="stat-label">Schüler gesamt</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">23</div>
+                <div class="stat-label">Berichte offen</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">92%</div>
+                <div class="stat-label">Ø Anwesenheit</div>
+            </div>
+        </div>
+
+        <!-- Dashboard Cards -->
+        <div class="dashboard-grid">
+            <!-- Aktuelle Kurse -->
+            <div class="dashboard-card">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <span class="card-icon">📚</span>
+                        Meine Kurse
+                    </h3>
+                    <a href="#" class="card-action">Alle anzeigen →</a>
+                </div>
+                <div class="card-content">
+                    <div class="list-item">
+                        <div class="item-info">
+                            <h4>Mathematik Grundkurs</h4>
+                            <p>24 Schüler • Raum A101</p>
+                        </div>
+                        <span class="status-badge status-active">Aktiv</span>
+                    </div>
+                    <div class="list-item">
+                        <div class="item-info">
+                            <h4>Physik Leistungskurs</h4>
+                            <p>18 Schüler • Raum B203</p>
+                        </div>
+                        <span class="status-badge status-active">Aktiv</span>
+                    </div>
+                    <div class="list-item">
+                        <div class="item-info">
+                            <h4>Mathematik Förderung</h4>
+                            <p>12 Schüler • Raum A105</p>
+                        </div>
+                        <span class="status-badge status-pending">Geplant</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Anstehende Termine -->
+            <div class="dashboard-card">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <span class="card-icon">📅</span>
+                        Anstehende Termine
+                    </h3>
+                    <a href="#" class="card-action">Kalender →</a>
+                </div>
+                <div class="card-content">
+                    <div class="list-item">
+                        <div class="item-info">
+                            <h4>Mathe GK - Stunde 3</h4>
+                            <p>Heute, 10:15 - 11:00</p>
+                        </div>
+                        <span class="status-badge status-pending">In 2h</span>
+                    </div>
+                    <div class="list-item">
+                        <div class="item-info">
+                            <h4>Physik LK - Stunde 5</h4>
+                            <p>Heute, 12:00 - 12:45</p>
+                        </div>
+                        <span class="status-badge status-pending">In 4h</span>
+                    </div>
+                    <div class="list-item">
+                        <div class="item-info">
+                            <h4>Lehrerkonferenz</h4>
+                            <p>Morgen, 14:00 - 15:30</p>
+                        </div>
+                        <span class="status-badge status-active">Wichtig</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Offene Berichte -->
+            <div class="dashboard-card">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <span class="card-icon">📝</span>
+                        Offene Berichte
+                    </h3>
+                    <a href="#" class="card-action">Alle Berichte →</a>
+                </div>
+                <div class="card-content">
+                    <div class="list-item">
+                        <div class="item-info">
+                            <h4>Müller, Anna - Mathe GK</h4>
+                            <p>Fällig: 28.07.2025</p>
+                        </div>
+                        <span class="status-badge status-pending">3 Tage</span>
+                    </div>
+                    <div class="list-item">
+                        <div class="item-info">
+                            <h4>Schmidt, Paul - Physik LK</h4>
+                            <p>Fällig: 30.07.2025</p>
+                        </div>
+                        <span class="status-badge status-active">5 Tage</span>
+                    </div>
+                    <div class="list-item">
+                        <div class="item-info">
+                            <h4>Wagner, Lisa - Mathe GK</h4>
+                            <p>Fällig: 02.08.2025</p>
+                        </div>
+                        <span class="status-badge status-active">8 Tage</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Fachinhalte -->
+            <div class="dashboard-card">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <span class="card-icon">📖</span>
+                        Meine Fachinhalte
+                    </h3>
+                    <a href="#" class="card-action">Verwalten →</a>
+                </div>
+                <div class="card-content">
+                    <div class="list-item">
+                        <div class="item-info">
+                            <h4>Analysis I</h4>
+                            <p>Grundlagen, Grenzwerte, Ableitungen</p>
+                        </div>
+                        <span class="status-badge status-active">Aktiv</span>
+                    </div>
+                    <div class="list-item">
+                        <div class="item-info">
+                            <h4>Mechanik</h4>
+                            <p>Kinematik, Dynamik, Energie</p>
+                        </div>
+                        <span class="status-badge status-active">Aktiv</span>
+                    </div>
+                    <div class="list-item">
+                        <div class="item-info">
+                            <h4>Stochastik</h4>
+                            <p>Wahrscheinlichkeit, Statistik</p>
+                        </div>
+                        <span class="status-badge status-completed">Geplant</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Schüler Übersicht -->
+            <div class="dashboard-card">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <span class="card-icon">👥</span>
+                        Schüler Übersicht
+                    </h3>
+                    <a href="#" class="card-action">Alle Schüler →</a>
+                </div>
+                <div class="card-content">
+                    <div class="list-item">
+                        <div class="item-info">
+                            <h4>Aktive Schüler</h4>
+                            <p>In allen Kursen</p>
+                        </div>
+                        <span class="status-badge status-active">145</span>
+                    </div>
+                    <div class="list-item">
+                        <div class="item-info">
+                            <h4>Neue Nachrichten</h4>
+                            <p>Ungelesene Mitteilungen</p>
+                        </div>
+                        <span class="status-badge status-pending">7</span>
+                    </div>
+                    <div class="list-item">
+                        <div class="item-info">
+                            <h4>Auffälligkeiten</h4>
+                            <p>Benötigen Aufmerksamkeit</p>
+                        </div>
+                        <span class="status-badge status-pending">3</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Letzte Aktivitäten -->
+            <div class="dashboard-card">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <span class="card-icon">🕒</span>
+                        Letzte Aktivitäten
+                    </h3>
+                    <a href="#" class="card-action">Verlauf →</a>
+                </div>
+                <div class="card-content">
+                    <div class="list-item">
+                        <div class="item-info">
+                            <h4>Bericht erstellt</h4>
+                            <p>Müller, Jonas - vor 2 Stunden</p>
+                        </div>
+                        <span class="status-badge status-completed">✓</span>
+                    </div>
+                    <div class="list-item">
+                        <div class="item-info">
+                            <h4>Anwesenheit eingetragen</h4>
+                            <p>Mathe GK - vor 3 Stunden</p>
+                        </div>
+                        <span class="status-badge status-completed">✓</span>
+                    </div>
+                    <div class="list-item">
+                        <div class="item-info">
+                            <h4>Notizen hinzugefügt</h4>
+                            <p>Physik LK - gestern</p>
+                        </div>
+                        <span class="status-badge status-completed">✓</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
