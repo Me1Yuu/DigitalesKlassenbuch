@@ -1,513 +1,550 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="einstellung.css">
     <title>Einstellungen</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: #f7f7f8;
+            color: #2d3748;
+        }
+
+        .main-container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: 260px;
+            background: #fff;
+            border-right: 1px solid #edf2f7;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            padding: 2rem 1rem 1rem 1rem;
+        }
+
+        .logo-icon {
+            width: 40px;
+            margin-right: 1rem;
+        }
+
+        .logo-text {
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: #3182ce;
+            line-height: 1.2;
+        }
+
+        .nav-items {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            color: #2d3748;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: background 0.2s;
+        }
+
+        .nav-item.active,
+        .nav-item:hover {
+            background: #ebf8ff;
+            color: #3182ce;
+        }
+
+        .nav-icon {
+            width: 22px;
+            height: 22px;
+            margin-right: 1rem;
+            background: #aed8fc;
+            border-radius: 5px;
+        }
+
+        .logout {
+            margin-top: auto;
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .content-area {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            background: #fff;
+            border-bottom: 1px solid #ececec;
+            padding: 2rem 2rem 1rem 2rem;
+        }
+
+        .header-content h1 {
+            margin: 0;
+            font-size: 2rem;
+            font-weight: 600;
+        }
+
+        .settings-container {
+            display: flex;
+            flex: 1;
+        }
+
+        .settings-nav {
+            width: 300px;
+            background: #f6f7fa;
+            border-right: 1px solid #ececec;
+            display: flex;
+            flex-direction: column;
+            padding: 1.5rem 1rem 1rem 2rem;
+        }
+
+        .tab-button {
+            display: flex;
+            align-items: center;
+            background: none;
+            border: none;
+            font-size: 1.1rem;
+            padding: 0.85rem 1rem;
+            margin-bottom: 0.4rem;
+            color: #2d3748;
+            cursor: pointer;
+            border-radius: 6px;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .tab-button.active,
+        .tab-button:hover {
+            background: #ebf8ff;
+            color: #3182ce;
+        }
+
+        .tab-icon {
+            width: 22px;
+            height: 22px;
+            margin-right: 0.8rem;
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 2.5rem 3rem;
+            background: #fcfcfd;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.3s;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .setting-group {
+            margin-bottom: 2.5rem;
+        }
+
+        .setting-group h3 {
+            margin-top: 0;
+            margin-bottom: 1.2rem;
+            font-size: 1.1rem;
+            color: #3182ce;
+            font-weight: 600;
+        }
+
+        .setting-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.1rem;
+        }
+
+        .setting-info {
+            min-width: 230px;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .setting-label {
+            font-weight: 500;
+            margin-bottom: 1px;
+        }
+
+        .setting-description {
+            font-size: 0.93rem;
+            color: #6a7587;
+        }
+
+        .setting-control {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+        }
+
+        .input,
+        .select {
+            font-size: 1.03rem;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            border: 1px solid #d0d5db;
+            background: #fff;
+            transition: border 0.2s;
+        }
+
+        .input:focus,
+        .select:focus {
+            border-color: #3182ce;
+            outline: none;
+        }
+
+        .btn {
+            font-size: 1.03rem;
+            border-radius: 5px;
+            padding: 0.5rem 1.3rem;
+            margin-left: 0.8rem;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: #3182ce;
+            color: #fff;
+        }
+
+        .btn-secondary {
+            background: #b6c5d6;
+            color: #283d54;
+        }
+
+        .toggle {
+            width: 40px;
+            height: 24px;
+            background: #d0d5db;
+            border-radius: 12px;
+            position: relative;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .toggle.active {
+            background: #3182ce;
+        }
+
+        .toggle-thumb {
+            position: absolute;
+            left: 3px;
+            top: 2px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #fff;
+            transition: left 0.2s;
+        }
+
+        .toggle.active .toggle-thumb {
+            left: 17px;
+        }
+
+        .save-section {
+            margin-top: 2.5rem;
+            text-align: right;
+        }
+
+        @media (max-width: 900px) {
+            .main-content {
+                padding: 2rem 1rem;
+            }
+
+            .settings-nav {
+                width: 110px;
+            }
+        }
+
+        /* Utility Header Styles */
+.utility-header {
+     background-color: var(--main-white);
+    padding: 15px 20px;
+    border-bottom: 1px solid var(--sidebar-border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.date-time {
+    font-size: 16px;
+    color: #333;
+}
+
+.sun-icon {
+    width: 32px;
+    height: 32px;
+    background: #ffd700;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    border: 2px solid #e2e8f0;
+}
+
+
+
+/* CSS-Variablen für Theme-Switching */
+:root {
+    --main-white: #ffffff;
+    --sidebar-border: #e2e8f0;
+    --text-color: #2d3748;
+    --bg-color: #f7f7f8;
+}
+
+[data-theme="dark"] {
+    --main-white: #2d3748;
+    --sidebar-border: #4a5568;
+    --text-color: #e2e8f0;
+    --bg-color: #1a202c;
+}
+
+/* Responsive Anpassungen */
+@media (max-width: 768px) {
+    .utility-header {
+        padding: 10px 15px;
+        gap: 15px;
+    }
+    
+    .date-time {
+        min-width: 100px;
+        font-size: 0.8rem;
+        padding: 4px 8px;
+    }
+    
+}
+
+
+        /* Add additional styling for responsive design if needed */
+    </style>
 </head>
 
 <body>
-    <!-- Header -->
-    <div class="header">
-        <div class="header-content">
-            <h1>Einstellungen</h1>
-            <p>Verwalte deine Klassenbuch-Einstellungen und Präferenzen</p>
-        </div>
-    </div>
-
-    <div class="container">
-        <!-- Sidebar Navigation -->
+    <!-- Hauptcontainer -->
+    <div class="main-container">
+        <!-- Sidebar Navigation (dein Original) -->
         <div class="sidebar">
-            <button class="tab-button active" data-tab="profile">
-                <svg class="tab-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
-                </svg>
-                Profil & Account
-            </button>
-            
-            <button class="tab-button" data-tab="display">
-                <svg class="tab-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zM21 5a2 2 0 00-2-2h-4a2 2 0 00-2 2v12a4 4 0 004 4h4a2 2 0 002-2V5z"></path>
-                </svg>
-                Darstellung
-            </button>
-            
-            <button class="tab-button" data-tab="notifications">
-                <svg class="tab-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 17h5l-5 5v-5zM4.868 19.502l5.686-5.686a.5.5 0 01.707 0l1.414 1.414a.5.5 0 010 .707l-5.686 5.686"></path>
-                </svg>
-                Benachrichtigungen
-            </button>
-            
-            <button class="tab-button" data-tab="privacy">
-                <svg class="tab-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
-                </svg>
-                Datenschutz
-            </button>
-            
-            <button class="tab-button" data-tab="filters">
-                <svg class="tab-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"></path>
-                </svg>
-                Filter & Standards
-            </button>
-            
-            <button class="tab-button" data-tab="export">
-                <svg class="tab-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-                </svg>
-                Export & Backup
-            </button>
+            <div class="logo">
+                <img src="lug logo.png" alt="" class="logo-icon">
+                <div class="logo-text">Digitales<br>Klassenbuch</div>
+            </div>
+            <div class="nav-items">
+                <a href="index.html" class="nav-item">
+                    <div class="nav-icon"></div>
+                    <span>Startseite</span>
+                </a>
+                <a href="profil.html" class="nav-item">
+                    <div class="nav-icon"></div>
+                    <span>Profil</span>
+                </a>
+                <a href="verwaltung.html" class="nav-item">
+                    <div class="nav-icon"></div>
+                    <span>Verwaltung</span>
+                </a>
+                <div class="nav-item">
+                    <div class="nav-icon"></div>
+                    <span>Eintrag</span>
+                </div>
+                <div class="nav-item">
+                    <div class="nav-icon"></div>
+                    <span>Kalender</span>
+                </div>
+                <a href="einstellung.html" class="nav-item active">
+                    <div class="nav-icon"></div>
+                    <span>Einstellungen</span>
+                </a>
+            </div>
+            <div class="logout">
+                <div class="nav-icon"></div>
+                <span>Ausloggen</span>
+            </div>
         </div>
-
-        <!-- Main Content -->
-        <div class="main-content">
-            <!-- Profile Tab -->
-            <div class="tab-content active" id="profile">
-                <div class="setting-group">
-                    <h3>Persönliche Informationen</h3>
-                    
-                    <div class="setting-row">
-                        <div class="setting-info">
-                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
-                            </svg>
-                            <div>
-                                <div class="setting-label">Name</div>
-                            </div>
-                        </div>
-                        <div class="setting-control">
-                            <input type="text" class="input" value="Max Mustermann" id="userName">
-                        </div>
-                    </div>
-                    
-                    <div class="setting-row">
-                        <div class="setting-info">
-                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
-                            </svg>
-                            <div>
-                                <div class="setting-label">E-Mail Adresse</div>
-                            </div>
-                        </div>
-                        <div class="setting-control">
-                            <input type="email" class="input" value="max.mustermann@beispiel.de" id="userEmail">
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="setting-group">
-                    <h3>Account Sicherheit</h3>
-                    
-                    <div class="setting-row">
-                        <div class="setting-info">
-                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
-                            </svg>
-                            <div>
-                                <div class="setting-label">Passwort ändern</div>
-                                <div class="setting-description">Letztes Update vor 3 Monaten</div>
-                            </div>
-                        </div>
-                        <div class="setting-control">
-                            <button class="btn btn-primary">Ändern</button>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="setting-group">
-                    <h3>Sprache & Region</h3>
-                    
-                    <div class="setting-row">
-                        <div class="setting-info">
-                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path>
-                            </svg>
-                            <div>
-                                <div class="setting-label">Sprache der Benutzeroberfläche</div>
-                            </div>
-                        </div>
-                        <div class="setting-control">
-                            <select class="select" id="language">
-                                <option value="de">Deutsch</option>
-                                <option value="en">English</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
+        <!-- Content Bereich -->
+        <div class="content-area">
+            <div class="utility-header">
+                <div class="date-time" id="current-date"></div>
+                <div class="date-time" id="current-time"></div>
+                <div class="sun-icon" id="theme-toggle"></div>
             </div>
-
-            <!-- Display Tab -->
-            <div class="tab-content" id="display">
-                <div class="setting-group">
-                    <h3>Erscheinungsbild</h3>
-                    
-                    <div class="setting-row">
-                        <div class="setting-info">
-                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
-                            </svg>
-                            <div>
-                                <div class="setting-label">Theme</div>
+    
+            <div class="settings-container">
+                <!-- Settings Tabs -->
+                <div class="settings-nav">
+                    <button class="tab-button active" data-tab="profile">&#128100; Profil & Account</button>
+                    <button class="tab-button" data-tab="display">&#128187; Darstellung</button>
+                    <button class="tab-button" data-tab="notifications">&#128276; Benachrichtigungen</button>
+                    <button class="tab-button" data-tab="privacy">&#128274; Datenschutz</button>
+                    <button class="tab-button" data-tab="filters">&#128200; Filter & Standards</button>
+                    <button class="tab-button" data-tab="export">&#128190; Export & Backup</button>
+                </div>
+                <!-- Einstellungen Inhalt -->
+                <div class="main-content">
+                    <!-- PROFIL -->
+                    <div class="tab-content active" id="profile">
+                        <div class="setting-group">
+                            <h3>Persönliche Informationen</h3>
+                            <div class="setting-row">
+                                <div class="setting-info">
+                                    <div class="setting-label">Name</div>
+                                </div>
+                                <div class="setting-control">
+                                    <input type="text" class="input" value="Max Mustermann" id="userName">
+                                </div>
+                            </div>
+                            <div class="setting-row">
+                                <div class="setting-info">
+                                    <div class="setting-label">E-Mail Adresse</div>
+                                </div>
+                                <div class="setting-control">
+                                    <input type="email" class="input" value="max.mustermann@beispiel.de" id="userEmail">
+                                </div>
                             </div>
                         </div>
-                        <div class="setting-control">
-                            <select class="select" id="theme">
-                                <option value="light">Hell</option>
-                                <option value="dark">Dunkel</option>
-                                <option value="auto">Automatisch</option>
-                            </select>
+                        <div class="setting-group">
+                            <h3>Account Sicherheit</h3>
+                            <div class="setting-row">
+                                <div class="setting-info">
+                                    <div class="setting-label">Passwort ändern</div>
+                                    <div class="setting-description">Letztes Update vor 3 Monaten</div>
+                                </div>
+                                <div class="setting-control">
+                                    <button class="btn btn-primary">Ändern</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="setting-group">
+                            <h3>Sprache & Region</h3>
+                            <div class="setting-row">
+                                <div class="setting-info">
+                                    <div class="setting-label">Sprache der Benutzeroberfläche</div>
+                                </div>
+                                <div class="setting-control">
+                                    <select class="select" id="language">
+                                        <option value="de">Deutsch</option>
+                                        <option value="en">English</option>
+                                    </select>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    
-                    <div class="setting-row">
-                        <div class="setting-info">
-                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 2l3 6 3-6-3 6h7l-3 6 3-6-3 6 3 6"></path>
-                            </svg>
-                            <div>
-                                <div class="setting-label">Schriftgröße</div>
+                    <!-- DARSTELLUNG -->
+                    <div class="tab-content" id="display">
+                        <div class="setting-group">
+                            <h3>Erscheinungsbild</h3>
+                            <div class="setting-row">
+                                <div class="setting-info">
+                                    <div class="setting-label">Theme</div>
+                                </div>
+                                <div class="setting-control">
+                                    <select class="select" id="theme">
+                                        <option value="light">Hell</option>
+                                        <option value="dark">Dunkel</option>
+                                        <option value="auto">Automatisch</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="setting-row">
+                                <div class="setting-info">
+                                    <div class="setting-label">Schriftgröße</div>
+                                </div>
+                                <div class="setting-control">
+                                    <select class="select" id="fontSize">
+                                        <option value="small">Klein</option>
+                                        <option value="medium" selected>Mittel</option>
+                                        <option value="large">Groß</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
-                        <div class="setting-control">
-                            <select class="select" id="fontSize">
-                                <option value="small">Klein</option>
-                                <option value="medium" selected>Mittel</option>
-                                <option value="large">Groß</option>
-                            </select>
+                        <div class="setting-group">
+                            <h3>Listenansicht</h3>
+                            <div class="setting-row">
+                                <div class="setting-info">
+                                    <div class="setting-label">Einträge pro Seite</div>
+                                </div>
+                                <div class="setting-control">
+                                    <select class="select" id="entriesPerPage">
+                                        <option value="10">10</option>
+                                        <option value="20" selected>20</option>
+                                        <option value="50">50</option>
+                                        <option value="100">100</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="setting-row">
+                                <div class="setting-info">
+                                    <div class="setting-label">Standard-Ansicht beim Login</div>
+                                </div>
+                                <div class="setting-control">
+                                    <select class="select" id="defaultView">
+                                        <option value="dashboard" selected>Dashboard</option>
+                                        <option value="courses">Kursliste</option>
+                                        <option value="calendar">Kalender</option>
+                                        <option value="personal">Persönliche Ansicht</option>
+                                    </select>
+                                </div>
+                            </div>
                         </div>
+                        <div class="setting-group">
+                            <h3>Zeit & Datum</h3>
+                            <div class="setting-row">
+                                <div class="setting-info">
+                                    <div class="setting-label">Häufigkeit der Erinnerungen</div>
+                                </div>
+                                <div class="setting-control">
+                                    <select class="select" id="reminderFrequency">
+                                        <option value="daily" selected>Täglich</option>
+                                        <option value="weekly">Wöchentlich</option>
+                                        <option value="monthly">Monatlich</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Die weiteren Tabs (analog zu deinem alten Code) ... -->
+                    <!-- Benachrichtigungen, Datenschutz, Filter & Standards, Export & Backup -->
+                    <!-- (Baue hier deine bisherigen Einstellungen analog ein) -->
+                    <div class="save-section">
+                        <button class="btn btn-secondary">Zurücksetzen</button>
+                        <button class="btn btn-primary">Änderungen speichern</button>
                     </div>
                 </div>
-                
-                <div class="setting-group">
-                    <h3>Listenansicht</h3>
-                    
-                    <div class="setting-row">
-                        <div class="setting-info">
-                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-                            </svg>
-                            <div>
-                                <div class="setting-label">Einträge pro Seite</div>
-                            </div>
-                        </div>
-                        <div class="setting-control">
-                            <select class="select" id="entriesPerPage">
-                                <option value="10">10</option>
-                                <option value="20" selected>20</option>
-                                <option value="50">50</option>
-                                <option value="100">100</option>
-                            </select>
-                        </div>
-                    </div>
-                    
-                    <div class="setting-row">
-                        <div class="setting-info">
-                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
-                            </svg>
-                            <div>
-                                <div class="setting-label">Standard-Ansicht beim Login</div>
-                            </div>
-                        </div>
-                        <div class="setting-control">
-                            <select class="select" id="defaultView">
-                                <option value="dashboard" selected>Dashboard</option>
-                                <option value="courses">Kursliste</option>
-                                <option value="calendar">Kalender</option>
-                                <option value="personal">Persönliche Ansicht</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="setting-group">
-                    <h3>Zeit & Datum</h3>
-                    
-                    <div class="setting-row">
-                        <div class="setting-info">
-                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                            </svg>
-                            <div>
-                                <div class="setting-label">Häufigkeit der Erinnerungen</div>
-                            </div>
-                        </div>
-                        <div class="setting-control">
-                            <select class="select" id="reminderFrequency">
-                                <option value="daily" selected>Täglich</option>
-                                <option value="weekly">Wöchentlich</option>
-                                <option value="monthly">Monatlich</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Privacy Tab -->
-            <div class="tab-content" id="privacy">
-                <div class="setting-group">
-                    <h3>Private Notizen</h3>
-                    
-                    <div class="setting-row">
-                        <div class="setting-info">
-                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.878 9.878L3 3m6.878 6.878L21 21"></path>
-                            </svg>
-                            <div>
-                                <div class="setting-label">Private Notizen standardmäßig aktiviert</div>
-                                <div class="setting-description">Neue Einträge haben private Notizen aktiviert</div>
-                            </div>
-                        </div>
-                        <div class="setting-control">
-                            <div class="toggle active" onclick="toggleSetting(this)">
-                                <div class="toggle-thumb"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="setting-group">
-                    <h3>Aktivitäten & Änderungen</h3>
-                    
-                    <div class="setting-row">
-                        <div class="setting-info">
-                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
-                            </svg>
-                            <div>
-                                <div class="setting-label">Änderungsansicht anzeigen</div>
-                                <div class="setting-description">Sehen wer was zuletzt bearbeitet hat</div>
-                            </div>
-                        </div>
-                        <div class="setting-control">
-                            <div class="toggle active" onclick="toggleSetting(this)">
-                                <div class="toggle-thumb"></div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="setting-row">
-                        <div class="setting-info">
-                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
-                            </svg>
-                            <div>
-                                <div class="setting-label">Meine Aktivitäten sichtbar</div>
-                                <div class="setting-description">Andere können meine Bearbeitungen sehen</div>
-                            </div>
-                        </div>
-                        <div class="setting-control">
-                            <div class="toggle active" onclick="toggleSetting(this)">
-                                <div class="toggle-thumb"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="setting-group">
-                    <h3>Sichtbarkeit der Einträge</h3>
-                    
-                    <div class="setting-row">
-                        <div class="setting-info">
-                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
-                            </svg>
-                            <div>
-                                <div class="setting-label">Wer kann meine Einträge sehen</div>
-                            </div>
-                        </div>
-                        <div class="setting-control">
-                            <select class="select" id="entryVisibility">
-                                <option value="trainer_only">Nur Trainer</option>
-                                <option value="trainer_students" selected>Trainer & Mitschüler</option>
-                                <option value="all">Alle Nutzer</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Filters Tab -->
-            <div class="tab-content" id="filters">
-                <div class="setting-group">
-                    <h3>Standard-Filter</h3>
-                    
-                    <div class="setting-row">
-                        <div class="setting-info">
-                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                            </svg>
-                            <div>
-                                <div class="setting-label">Standard-Zeitraum</div>
-                            </div>
-                        </div>
-                        <div class="setting-control">
-                            <select class="select" id="defaultTimeRange">
-                                <option value="week">Letzte Woche</option>
-                                <option value="month" selected>Letzter Monat</option>
-                                <option value="quarter">Letztes Quartal</option>
-                                <option value="all">Alle Einträge</option>
-                            </select>
-                        </div>
-                    </div>
-                    
-                    <div class="setting-row">
-                        <div class="setting-info">
-                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"></path>
-                            </svg>
-                            <div>
-                                <div class="setting-label">Standard-Sortierung</div>
-                            </div>
-                        </div>
-                        <div class="setting-control">
-                            <select class="select" id="defaultSorting">
-                                <option value="date_desc" selected>Datum (neueste zuerst)</option>
-                                <option value="date_asc">Datum (älteste zuerst)</option>
-                                <option value="subject">Nach Thema</option>
-                                <option value="trainer">Nach Trainer</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="setting-group">
-                    <h3>Kalender-Einstellungen</h3>
-                    
-                    <div class="setting-row">
-                        <div class="setting-info">
-                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                            </svg>
-                            <div>
-                                <div class="setting-label">Standard Kalender-Ansicht</div>
-                            </div>
-                        </div>
-                        <div class="setting-control">
-                            <select class="select" id="calendarView">
-                                <option value="month" selected>Monatsansicht</option>
-                                <option value="week">Wochenansicht</option>
-                                <option value="day">Tagesansicht</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="setting-group">
-                    <h3>Bevorzugte Auswahl</h3>
-                    
-                    <div class="setting-row">
-                        <div class="setting-info">
-                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
-                            </svg>
-                            <div>
-                                <div class="setting-label">Bevorzugte Gruppen</div>
-                                <div class="setting-description">Diese Gruppen werden standardmäßig ausgewählt</div>
-                            </div>
-                        </div>
-                        <div class="setting-control">
-                            <div style="font-size: 0.9rem; color: #718096;">
-                                Gruppe A, Gruppe B
-                                <button class="btn btn-secondary" style="margin-left: 0.5rem; padding: 0.25rem 0.5rem; font-size: 0.8rem;">Bearbeiten</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Export Tab -->
-            <div class="tab-content" id="export">
-                <div class="setting-group">
-                    <h3>Export-Einstellungen</h3>
-                    
-                    <div class="setting-row">
-                        <div class="setting-info">
-                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-                            </svg>
-                            <div>
-                                <div class="setting-label">Standard Export-Format</div>
-                            </div>
-                        </div>
-                        <div class="setting-control">
-                            <select class="select" id="exportFormat">
-                                <option value="pdf" selected>PDF</option>
-                                <option value="excel">Excel (.xlsx)</option>
-                                <option value="csv">CSV</option>
-                                <option value="word">Word (.docx)</option>
-                            </select>
-                        </div>
-                    </div>
-                    
-                    <div class="setting-row">
-                        <div class="setting-info">
-                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.878 9.878L3 3m6.878 6.878L21 21"></path>
-                            </svg>
-                            <div>
-                                <div class="setting-label">Private Notizen in Export einschließen</div>
-                                <div class="setting-description">Private Notizen werden mit exportiert</div>
-                            </div>
-                        </div>
-                        <div class="setting-control">
-                            <div class="toggle" onclick="toggleSetting(this)">
-                                <div class="toggle-thumb"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="setting-group">
-                    <h3>Backup & Sicherung</h3>
-                    
-                    <div class="setting-row">
-                        <div class="setting-info">
-                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h2m0-13h2a2 2 0 012 2v9a2 2 0 01-2 2H9m0-13v13"></path>
-                            </svg>
-                            <div>
-                                <div class="setting-label">Automatische Sicherung</div>
-                                <div class="setting-description">Regelmäßige Backups der eigenen Daten</div>
-                            </div>
-                        </div>
-                        <div class="setting-control">
-                            <div class="toggle active" onclick="toggleSetting(this)">
-                                <div class="toggle-thumb"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="setting-group">
-                    <h3>Datenexport</h3>
-                    
-                    <div class="info-box">
-                        <h4>Vollständigen Datenexport anfordern</h4>
-                        <p>Exportiere alle deine Klassenbuch-Daten als ZIP-Archiv. Dies kann einige Minuten dauern.</p>
-                        <button class="btn btn-primary">Export starten</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Save Section -->
-            <div class="save-section">
-                <button class="btn btn-secondary">Zurücksetzen</button>
-                <button class="btn btn-primary">
-                    <svg style="width: 16px; height: 16px; margin-right: 0.5rem;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h2m0-13h2a2 2 0 012 2v9a2 2 0 01-2 2H9m0-13v13"></path>
-                    </svg>
-                    Änderungen speichern
-                </button>
             </div>
         </div>
     </div>
+ 
 </body>
 
 </html>
-
