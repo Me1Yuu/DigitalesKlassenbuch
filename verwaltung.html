@@ -1,115 +1,155 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Verwaltung - Digitales Klassenbuch</title>
-    <link rel="stylesheet" href="index.css" />
-    <link rel="stylesheet" href="verwaltung.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digitales Klassenbuch - Verwaltung</title>
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="verwaltung.css">
 </head>
+
 <body>
-    <!-- Sidebar -->
+    <!-- Sidebar Navigation (gleich wie Startseite) -->
     <div class="sidebar">
         <div class="logo">
-            <img src="lug logo.png" alt="Logo" class="logo-icon" />
+            <img src="lug logo.png" alt="LUG Logo" class="logo-icon">
             <div class="logo-text">Digitales<br>Klassenbuch</div>
         </div>
+        
         <div class="nav-items">
-            <a href="index.html" class="nav-item">Startseite</a>
-            <a href="profil.html" class="nav-item">Profil</a>
-            <a href="verwaltung.html" class="nav-item active">Verwaltung</a>
-            <a href="#" class="nav-item">Eintrag</a>
-            <a href="#" class="nav-item">Kalender</a>
-            <a href="einstellung.html" class="nav-item">Einstellungen</a>
+            <a href="index.html" class="nav-item">
+                <div class="nav-icon nav-icon-home"></div>
+                <span>Startseite</span>
+            </a>
+            
+            <a href="profil.html" class="nav-item">
+                <div class="nav-icon nav-icon-profil"></div>
+                <span>Profil</span>
+            </a>
+            
+            <a href="verwaltung.html" class="nav-item active">
+                <div class="nav-icon nav-icon-verwaltung"></div>
+                <span>Verwaltung</span>
+            </a>
+            
+            <a href="eintrag.html" class="nav-item">
+                <div class="nav-icon nav-icon-eintrag"></div>
+                <span>Eintrag</span>
+            </a>
+            
+            <a href="kalender.html" class="nav-item">
+                <div class="nav-icon nav-icon-kalender"></div>
+                <span>Kalender</span>
+            </a>
+            
+            <a href="einstellung.html" class="nav-item">
+                <div class="nav-icon nav-icon-einstellungen"></div>
+                <span>Einstellungen</span>
+            </a>
         </div>
-        <div class="logout">Ausloggen</div>
+        
+        <div class="logout">
+            <div class="nav-icon nav-icon-logout"></div>
+            <span>Ausloggen</span>
+        </div>
     </div>
 
     <!-- Hauptbereich -->
     <div class="main-content">
-        <!-- Header mit Datum, Uhrzeit & Darkmode Icon -->
-      <div class="header">
-            <div class="date-time"></div>
-            <div class="date-time"></div>
-            <div class="sun-icon"></div>
+        <!-- Header (gleich wie Startseite) -->
+        <div class="header">
+            <div class="date-time" id="datum"></div>
+            <div class="date-time" id="uhrzeit"></div>
+            <div class="sun-icon" title="Dark/Light Mode umschalten"></div>
         </div>
 
+        <div class="content-area">
+            <!-- Verwaltung Überschrift -->
+            <h1 class="page-title">Verwaltung</h1>
 
-        <h1>Verwaltung</h1>
+            <!-- Tab-Navigation -->
+            <div class="tab-navigation">
+                <button class="tab-btn active" data-tab="trainer">Trainer</button>
+                <button class="tab-btn" data-tab="kurse">Kurse</button>
+                <button class="tab-btn" data-tab="fachinhalte">Fachinhalte</button>
+                <button class="tab-btn" data-tab="umschueler">Umschüler</button>
+            </div>
 
-        <!-- Navigation (Tabs) -->
-        <nav class="main-nav" role="tablist" aria-label="Verwaltung Tabs">
-            <button role="tab" aria-selected="true" class="nav-btn active" onclick="showSection('trainer')" id="tab-trainer" aria-controls="trainer-section">Trainer</button>
-            <button role="tab" aria-selected="false" class="nav-btn" onclick="showSection('kurs')" id="tab-kurs" aria-controls="kurs-section">Kurse</button>
-            <button role="tab" aria-selected="false" class="nav-btn" onclick="showSection('fachinhalte')" id="tab-fachinhalte" aria-controls="fachinhalte-section">Fachinhalte</button>
-            <button role="tab" aria-selected="false" class="nav-btn" onclick="showSection('umschueler')" id="tab-umschueler" aria-controls="umschueler-section">Umschüler</button>
-        </nav>
+            <!-- Filter & Suche Bereich -->
+            <div class="filter-section">
+                <input type="text" id="searchInput" class="search-input" placeholder="🔍 Suchen...">
+                <select id="filterSelect" class="filter-select">
+                    <option value="alle">Alle anzeigen</option>
+                </select>
+            </div>
 
-        <!-- Bereiche / Sections -->
-        <!-- Trainer -->
-        <section id="trainer-section" role="tabpanel" aria-labelledby="tab-trainer" class="section-content active">
-            <table class="name-status-table">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Bereich</th>
-                    </tr>
-                </thead>
-                <tbody id="trainer-tbody">
-                    <tr><td colspan="2"><em>Noch keine Trainer eingetragen</em></td></tr>
-                </tbody>
-            </table>
-            
-        </section>
+            <!-- Tabellen Container -->
+            <div class="table-container">
+                <!-- Trainer Tabelle -->
+                <div class="tab-content active" id="trainer-content">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Bereich</th>
+                            </tr>
+                        </thead>
+                        <tbody id="trainer-tbody">
+                            <tr>
+                                <td colspan="2" class="empty-state">Noch keine Trainer eingetragen</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
 
-        <!-- Kurse -->
-        <section id="kurs-section" role="tabpanel" aria-labelledby="tab-kurs" class="section-content">
-            <table class="name-status-table">
-                <thead>
-                    <tr>
-                        <th>Kursname</th>
-                        <th>Anzahl Schüler</th>
-                        <th>Bereich</th>
-                    </tr>
-                </thead>
-                <tbody id="kurs-tbody">
-                    <tr><td colspan="3"><em>Noch keine Kurse eingetragen</em></td></tr>
-                </tbody>
-            </table>
-        </section>
+                <!-- Kurse Tabelle -->
+                <div class="tab-content" id="kurse-content">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Kursname</th>
+                                <th>Fachrichtung</th>
+                                <th>Startjahr</th>
+                                <th>Teilnehmer</th>
+                            </tr>
+                        </thead>
+                        <tbody id="kurse-tbody">
+                            <tr>
+                                <td colspan="4" class="empty-state">Noch keine Kurse eingetragen</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
 
-        <!-- Fachinhalte -->
-        <section id="fachinhalte-section" role="tabpanel" aria-labelledby="tab-fachinhalte" class="section-content">
-            <table class="name-status-table">
-                <thead>
-                    <tr>
-                        <th>Fachinhalt</th>
-                        <th>Bereich</th>
-                    </tr>
-                </thead>
-                <tbody id="fachinhalte-tbody">
-                    <tr><td colspan="2"><em>Noch keine Fachinhalte eingetragen</em></td></tr>
-                </tbody>
-            </table>
-        </section>
+                <!-- Fachinhalte als Grid -->
+                <div class="tab-content" id="fachinhalte-content">
+                    <div class="fachinhalte-grid" id="fachinhalte-grid">
+                        <p class="empty-state">Noch keine Fachinhalte eingetragen</p>
+                    </div>
+                </div>
 
-        <!-- Umschüler -->
-        <section id="umschueler-section" role="tabpanel" aria-labelledby="tab-umschueler" class="section-content">
-            <table class="name-status-table">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Kurs</th>
-                        <th>Bereich</th>
-                    </tr>
-                </thead>
-                <tbody id="umschueler-tbody">
-                    <tr><td colspan="3"><em>Noch keine Umschüler eingetragen</em></td></tr>
-                </tbody>
-            </table>
-        </section>
+                <!-- Umschüler Tabelle -->
+                <div class="tab-content" id="umschueler-content">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Kurs</th>
+                                <th>Fachrichtung</th>
+                            </tr>
+                        </thead>
+                        <tbody id="umschueler-tbody">
+                            <tr>
+                                <td colspan="3" class="empty-state">Noch keine Umschüler eingetragen</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <script src="verwaltung.js" defer></script>
+    <script src="index.js"></script>
+    <script src="verwaltung.js"></script>
 </body>
 </html>
