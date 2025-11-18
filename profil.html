@@ -1,109 +1,217 @@
 <!DOCTYPE html>
 <html lang="de">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profil - Digitales Klassenbuch</title>
-    <link rel="stylesheet" href="index.css">
     <link rel="stylesheet" href="profil.css">
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
 </head>
+
 <body>
-    <!-- Sidebar -->
+    <!-- Sidebar (gleich wie index.html) -->
     <div class="sidebar">
         <div class="logo">
-            <img src="lug logo.png" alt="" class="logo-icon">
-            <div class="logo-text">Digitales<br>Klassenbuch</div>
+            <div class="logo-icon"></div>
+            <span>Digitales Klassenbuch</span>
         </div>
-        <div class="nav-items">
+        <nav>
             <a href="index.html" class="nav-item">
-                <div class="nav-icon"></div>
+                <div class="nav-icon nav-icon-home"></div>
                 <span>Startseite</span>
             </a>
-             <a href="profil.html" class="nav-item active">
-                <div class="nav-icon"></div>
+            <a href="profil.html" class="nav-item active">
+                <div class="nav-icon nav-icon-profil"></div>
                 <span>Profil</span>
             </a>
-             <a href="verwaltung.html" class="nav-item active">
-                <div class="nav-icon"></div>
+            <a href="verwaltung.html" class="nav-item">
+                <div class="nav-icon nav-icon-verwaltung"></div>
                 <span>Verwaltung</span>
             </a>
-            <div class="nav-item">
-                <div class="nav-icon"></div>
+            <a href="eintrag.html" class="nav-item">
+                <div class="nav-icon nav-icon-eintrag"></div>
                 <span>Eintrag</span>
-            </div>
-            <div class="nav-item">
-                <div class="nav-icon"></div>
-                <span>Kalender</span>
-            </div>
-            <a href="einstellung.html" class="nav-item">
-                <div class="nav-icon"></div>
-                <span>Einstellungen</span>
             </a>
-        </div>
-        <div class="logout">
-            <div class="nav-icon"></div>
-            <span>Ausloggen</span>
+            <a href="kalender.html" class="nav-item">
+                <div class="nav-icon nav-icon-kalender"></div>
+                <span>Kalender</span>
+            </a>
+            <a href="einstellung.html" class="nav-item">
+                <div class="nav-icon nav-icon-einstellung"></div>
+                <span>Einstellung</span>
+            </a>
+        </nav>
+        <div class="sidebar-footer">
+            <a href="#" class="nav-item">
+                <div class="nav-icon nav-icon-logout"></div>
+                <span>Abmelden</span>
+            </a>
         </div>
     </div>
 
-     
     <!-- Main Content -->
     <div class="main-content">
-        <div class="header">
-            <div class="date-time"></div>
-            <div class="date-time"></div>
-            <div class="sun-icon"></div>
-        </div>
+        <!-- Header -->
+        <header class="header">
+            <div class="header-left">
+                <h1>Profil</h1>
+            </div>
+            <div class="header-right">
+                <div class="datetime">
+                    <span id="datum">Lädt...</span>
+                    <span id="uhrzeit">--:--</span>
+                </div>
+                <button class="theme-toggle" id="themeToggle">
+                    <div class="theme-icon"></div>
+                </button>
+            </div>
+        </header>
 
-        <!-- Profil Header -->
-        <div class="page-header">
-            <div class="trainer-info">
-                <div class="trainer-avatar" id="user-avatar"></div>
-                <div class="trainer-details">
-                    <h1 id="user-name">[Name]</h1>
-                    <p id="user-info">[Rolle - Bereich]</p>
+        <!-- Content Area -->
+        <div class="content">
+            
+            <!-- Profil Header Card -->
+            <div class="profile-header">
+               <!-- Avatar Section -->
+<div class="avatar-container">
+    <div class="avatar-display" id="avatarDisplay">MM</div>
+    
+    <input type="file" id="avatarUpload" class="avatar-upload" accept="image/*" hidden>
+    
+    <div class="avatar-buttons">
+        <button class="btn-change-avatar" id="avatarChangeBtn">
+            <i class="fa-solid fa-camera"></i> Foto ändern
+        </button>
+        
+        <button class="btn-delete-avatar" id="avatarDeleteBtn" style="display: none;">
+            <i class="fa-solid fa-trash"></i> Löschen
+        </button>
+    </div>
+</div>
+
+                <div class="profile-info">
+                    <h2>Max Mustermann</h2>
+                    <p class="role">AE / SI Trainer</p>
+                    <p class="email">max.mustermann@musterhausen.de</p>
                 </div>
             </div>
-            
-        </div>
 
-        <!-- Statistik -->
-        <div class="stats-overview">
-            <div class="stat-card">
-                <div class="stat-number" id="active-courses-count">--</div>
-                <div class="stat-label">Aktive Kurse</div>
+            <!-- Statistik Zeile -->
+            <div class="stats-row">
+                <div class="stat-card">
+                    <div class="stat-icon">📚</div>
+                    <div class="stat-content">
+                        <h3 id="statKurse">5</h3>
+                        <p>Aktive Kurse</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">📝</div>
+                    <div class="stat-content">
+                        <h3 id="statBerichte">3</h3>
+                        <p>Offene Berichte</p>
+                    </div>
+                </div>
             </div>
-            <div class="stat-card">
-                <div class="stat-number" id="open-reports-count">--</div>
-                <div class="stat-label">Offene Berichte</div>
-            </div>
-        </div>
 
-        <!-- Dashboard -->
-        <div class="dashboard-grid">
-            <div class="dashboard-card">
-                <h3>Meine Kurse</h3>
-                <div id="my-courses">Lorem Ipsum<!-- Kurse des Trainers aus DB laden --></div>
-            </div>
-            <div class="dashboard-card">
-                <h3>Anstehende Termine</h3>
-                <div id="upcoming-events">Lorem Ipsum<!-- Mit Kalender verknüpfen, Termine hier einfügen --></div>
-            </div>
-            <div class="dashboard-card">
-                <h3>Offene Berichte</h3>
-                <div id="open-reports">Lorem Ipsum<!-- Aus Erinnerungssystem oder DB generieren --></div>
-            </div>
-            <div class="dashboard-card">
-                <h3>Meine Fachinhalte</h3>
-                <div id="subject-content">Lorem Ipsum<!-- Fachinhalte aus DB oder Auswahlfeld einfügen --></div>
-            </div>
-            <div class="dashboard-card">
+            <!-- Haupt-Kacheln (4 Stück) -->
+            <section class="section3">
+                <div class="profile-grid">
+
+                    <div class="profile-card editable" data-modal="kurse">
+                        <div class="card-icon">
+                            <i class="fa-solid fa-book"></i>
+                        </div>
+                        <h3>Meine Kurse</h3>
+                        <p class="card-preview">4</p>
+                    </div>
+
+                    <div class="profile-card" data-modal="termine">
+                        <div class="card-icon">
+                            <i class="fa-solid fa-calendar-days"></i>
+                        </div>
+                        <h3>Anstehende Termine</h3>
+                        <p class="card-preview">2</p>
+                    </div>
+
+                    <div class="profile-card" data-modal="berichte">
+                        <div class="card-icon">
+                            <i class="fa-solid fa-file-lines"></i>
+                        </div>
+                        <h3>Berichtserfassung</h3>
+                        <p class="card-preview">3</p>
+                    </div>
+
+                    <div class="profile-card editable" data-modal="fachinhalte">
+                        <div class="card-icon">
+                            <i class="fa-solid fa-screwdriver-wrench"></i>
+                        </div>
+                        <h3>Meine Fachinhalte</h3>
+                        <p class="card-preview">10</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Letzte Aktivitäten -->
+            <div class="activities-section">
                 <h3>Letzte Aktivitäten</h3>
-                <div id="recent-activity">Lorem Ipsum<!-- Aktionen des aktuellen Users hier einfügen --></div>
+                <div class="activity-list">
+                    <div class="activity-item">
+                         <div class="activity-icon">
+                <i class="fa-solid fa-file-circle-plus"></i>
+            </div>
+                        <div class="activity-content">
+                            <p><strong>Eintrag erstellt</strong>: FI 23-3: HTML & CSS Grundlagen</p>
+                            <span class="activity-time">06.05.2025, 15:00 Uhr</span>
+                        </div>
+                    </div>
+                    <div class="activity-item">
+                         <div class="activity-icon">
+                <i class="fa-solid fa-pen-to-square"></i>
+            </div>
+                        <div class="activity-content">
+                            <p><strong>Eintrag bearbeitet</strong>: FI 21-1: JavaScript Einführung</p>
+                            <span class="activity-time">05.05.2025, 12:21 Uhr</span>
+                        </div>
+                    </div>
+                    <div class="activity-item">
+                       <div class="activity-icon">
+                <i class="fa-solid fa-user-pen"></i>
+            </div>
+                        <div class="activity-content">
+                            <p><strong>Profil aktualisiert</strong>: E-Mail Adresse geändert</p>
+                            <span class="activity-time">04.05.2025, 16:00 Uhr</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="universal-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modal-title">Titel</h2>
+                <button class="modal-close" id="modal-close">&times;</button>
+            </div>
+
+            <div class="modal-body">
+                <!-- INHALT wird hier eingefügt (dynamisch) -->
+                <div id="modal-list" class="modal-list"></div>
+            </div>
+
+            <!-- FOOTER: nur wenn editierbar -->
+            <div class="modal-footer" id="modal-footer" style="display: none;">
+                <button class="btn-cancel" id="btn-modal-cancel">Schließen</button>
+                <button class="btn-save" id="btn-modal-save">Speichern</button>
             </div>
         </div>
     </div>
 
     <script src="profil.js"></script>
+    <script src="index.js"></script>
 </body>
+
 </html>
