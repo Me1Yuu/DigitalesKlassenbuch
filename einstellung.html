@@ -1,550 +1,186 @@
 <!DOCTYPE html>
 <html lang="de">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Einstellungen - Digitales Klassenbuch</title>
     <link rel="stylesheet" href="einstellung.css">
-    <title>Einstellungen</title>
-    <style>
-        body {
-            margin: 0;
-            font-family: 'Segoe UI', Arial, sans-serif;
-            background: #f7f7f8;
-            color: #2d3748;
-        }
-
-        .main-container {
-            display: flex;
-            min-height: 100vh;
-        }
-
-        .sidebar {
-            width: 260px;
-            background: #fff;
-            border-right: 1px solid #edf2f7;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            padding: 2rem 1rem 1rem 1rem;
-        }
-
-        .logo-icon {
-            width: 40px;
-            margin-right: 1rem;
-        }
-
-        .logo-text {
-            font-weight: 700;
-            font-size: 1.2rem;
-            color: #3182ce;
-            line-height: 1.2;
-        }
-
-        .nav-items {
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-        }
-
-        .nav-item {
-            display: flex;
-            align-items: center;
-            padding: 1rem;
-            color: #2d3748;
-            text-decoration: none;
-            border-radius: 8px;
-            transition: background 0.2s;
-        }
-
-        .nav-item.active,
-        .nav-item:hover {
-            background: #ebf8ff;
-            color: #3182ce;
-        }
-
-        .nav-icon {
-            width: 22px;
-            height: 22px;
-            margin-right: 1rem;
-            background: #aed8fc;
-            border-radius: 5px;
-        }
-
-        .logout {
-            margin-top: auto;
-            padding: 1rem;
-            display: flex;
-            align-items: center;
-            cursor: pointer;
-        }
-
-        .content-area {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .header {
-            background: #fff;
-            border-bottom: 1px solid #ececec;
-            padding: 2rem 2rem 1rem 2rem;
-        }
-
-        .header-content h1 {
-            margin: 0;
-            font-size: 2rem;
-            font-weight: 600;
-        }
-
-        .settings-container {
-            display: flex;
-            flex: 1;
-        }
-
-        .settings-nav {
-            width: 300px;
-            background: #f6f7fa;
-            border-right: 1px solid #ececec;
-            display: flex;
-            flex-direction: column;
-            padding: 1.5rem 1rem 1rem 2rem;
-        }
-
-        .tab-button {
-            display: flex;
-            align-items: center;
-            background: none;
-            border: none;
-            font-size: 1.1rem;
-            padding: 0.85rem 1rem;
-            margin-bottom: 0.4rem;
-            color: #2d3748;
-            cursor: pointer;
-            border-radius: 6px;
-            transition: background 0.2s, color 0.2s;
-        }
-
-        .tab-button.active,
-        .tab-button:hover {
-            background: #ebf8ff;
-            color: #3182ce;
-        }
-
-        .tab-icon {
-            width: 22px;
-            height: 22px;
-            margin-right: 0.8rem;
-        }
-
-        .main-content {
-            flex: 1;
-            padding: 2.5rem 3rem;
-            background: #fcfcfd;
-        }
-
-        .tab-content {
-            display: none;
-        }
-
-        .tab-content.active {
-            display: block;
-            animation: fadeIn 0.3s;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-
-            to {
-                opacity: 1;
-            }
-        }
-
-        .setting-group {
-            margin-bottom: 2.5rem;
-        }
-
-        .setting-group h3 {
-            margin-top: 0;
-            margin-bottom: 1.2rem;
-            font-size: 1.1rem;
-            color: #3182ce;
-            font-weight: 600;
-        }
-
-        .setting-row {
-            display: flex;
-            align-items: center;
-            margin-bottom: 1.1rem;
-        }
-
-        .setting-info {
-            min-width: 230px;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .setting-label {
-            font-weight: 500;
-            margin-bottom: 1px;
-        }
-
-        .setting-description {
-            font-size: 0.93rem;
-            color: #6a7587;
-        }
-
-        .setting-control {
-            flex: 1;
-            display: flex;
-            align-items: center;
-            justify-content: flex-end;
-        }
-
-        .input,
-        .select {
-            font-size: 1.03rem;
-            padding: 0.5rem 1rem;
-            border-radius: 5px;
-            border: 1px solid #d0d5db;
-            background: #fff;
-            transition: border 0.2s;
-        }
-
-        .input:focus,
-        .select:focus {
-            border-color: #3182ce;
-            outline: none;
-        }
-
-        .btn {
-            font-size: 1.03rem;
-            border-radius: 5px;
-            padding: 0.5rem 1.3rem;
-            margin-left: 0.8rem;
-            cursor: pointer;
-            border: none;
-        }
-
-        .btn-primary {
-            background: #3182ce;
-            color: #fff;
-        }
-
-        .btn-secondary {
-            background: #b6c5d6;
-            color: #283d54;
-        }
-
-        .toggle {
-            width: 40px;
-            height: 24px;
-            background: #d0d5db;
-            border-radius: 12px;
-            position: relative;
-            cursor: pointer;
-            transition: background 0.2s;
-        }
-
-        .toggle.active {
-            background: #3182ce;
-        }
-
-        .toggle-thumb {
-            position: absolute;
-            left: 3px;
-            top: 2px;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background: #fff;
-            transition: left 0.2s;
-        }
-
-        .toggle.active .toggle-thumb {
-            left: 17px;
-        }
-
-        .save-section {
-            margin-top: 2.5rem;
-            text-align: right;
-        }
-
-        @media (max-width: 900px) {
-            .main-content {
-                padding: 2rem 1rem;
-            }
-
-            .settings-nav {
-                width: 110px;
-            }
-        }
-
-        /* Utility Header Styles */
-.utility-header {
-     background-color: var(--main-white);
-    padding: 15px 20px;
-    border-bottom: 1px solid var(--sidebar-border);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.date-time {
-    font-size: 16px;
-    color: #333;
-}
-
-.sun-icon {
-    width: 32px;
-    height: 32px;
-    background: #ffd700;
-    border-radius: 50%;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    position: relative;
-    border: 2px solid #e2e8f0;
-}
-
-
-
-/* CSS-Variablen für Theme-Switching */
-:root {
-    --main-white: #ffffff;
-    --sidebar-border: #e2e8f0;
-    --text-color: #2d3748;
-    --bg-color: #f7f7f8;
-}
-
-[data-theme="dark"] {
-    --main-white: #2d3748;
-    --sidebar-border: #4a5568;
-    --text-color: #e2e8f0;
-    --bg-color: #1a202c;
-}
-
-/* Responsive Anpassungen */
-@media (max-width: 768px) {
-    .utility-header {
-        padding: 10px 15px;
-        gap: 15px;
-    }
-    
-    .date-time {
-        min-width: 100px;
-        font-size: 0.8rem;
-        padding: 4px 8px;
-    }
-    
-}
-
-
-        /* Add additional styling for responsive design if needed */
-    </style>
 </head>
-
 <body>
-    <!-- Hauptcontainer -->
-    <div class="main-container">
-        <!-- Sidebar Navigation (dein Original) -->
-        <div class="sidebar">
-            <div class="logo">
-                <img src="lug logo.png" alt="" class="logo-icon">
-                <div class="logo-text">Digitales<br>Klassenbuch</div>
-            </div>
-            <div class="nav-items">
-                <a href="index.html" class="nav-item">
-                    <div class="nav-icon"></div>
-                    <span>Startseite</span>
-                </a>
-                <a href="profil.html" class="nav-item">
-                    <div class="nav-icon"></div>
-                    <span>Profil</span>
-                </a>
-                <a href="verwaltung.html" class="nav-item">
-                    <div class="nav-icon"></div>
-                    <span>Verwaltung</span>
-                </a>
-                <div class="nav-item">
-                    <div class="nav-icon"></div>
-                    <span>Eintrag</span>
-                </div>
-                <div class="nav-item">
-                    <div class="nav-icon"></div>
-                    <span>Kalender</span>
-                </div>
-                <a href="einstellung.html" class="nav-item active">
-                    <div class="nav-icon"></div>
-                    <span>Einstellungen</span>
-                </a>
-            </div>
-            <div class="logout">
-                <div class="nav-icon"></div>
-                <span>Ausloggen</span>
-            </div>
+    <!-- Sidebar (identisch wie index.html) -->
+    <div class="sidebar">
+        <div class="logo">
+            <div class="logo-icon"></div>
+            <span>Digitales Klassenbuch</span>
         </div>
-        <!-- Content Bereich -->
-        <div class="content-area">
-            <div class="utility-header">
-                <div class="date-time" id="current-date"></div>
-                <div class="date-time" id="current-time"></div>
-                <div class="sun-icon" id="theme-toggle"></div>
+        <nav>
+            <a href="index.html" class="nav-item">
+                <div class="nav-icon nav-icon-home"></div>
+                <span>Startseite</span>
+            </a>
+            <a href="profil.html" class="nav-item">
+                <div class="nav-icon nav-icon-profil"></div>
+                <span>Profil</span>
+            </a>
+            <a href="verwaltung.html" class="nav-item">
+                <div class="nav-icon nav-icon-verwaltung"></div>
+                <span>Verwaltung</span>
+            </a>
+            <a href="eintrag.html" class="nav-item">
+                <div class="nav-icon nav-icon-eintrag"></div>
+                <span>Eintrag</span>
+            </a>
+            <a href="kalender.html" class="nav-item">
+                <div class="nav-icon nav-icon-kalender"></div>
+                <span>Kalender</span>
+            </a>
+            <a href="einstellung.html" class="nav-item active">
+                <div class="nav-icon nav-icon-einstellung"></div>
+                <span>Einstellung</span>
+            </a>
+        </nav>
+        <div class="sidebar-footer">
+            <a href="#" class="nav-item">
+                <div class="nav-icon nav-icon-logout"></div>
+                <span>Abmelden</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Header (identisch wie index.html) -->
+        <header class="header">
+            <div class="header-left">
+                <h1>Einstellungen</h1>
             </div>
-    
-            <div class="settings-container">
-                <!-- Settings Tabs -->
-                <div class="settings-nav">
-                    <button class="tab-button active" data-tab="profile">&#128100; Profil & Account</button>
-                    <button class="tab-button" data-tab="display">&#128187; Darstellung</button>
-                    <button class="tab-button" data-tab="notifications">&#128276; Benachrichtigungen</button>
-                    <button class="tab-button" data-tab="privacy">&#128274; Datenschutz</button>
-                    <button class="tab-button" data-tab="filters">&#128200; Filter & Standards</button>
-                    <button class="tab-button" data-tab="export">&#128190; Export & Backup</button>
+            <div class="header-right">
+                <div class="datetime">
+                    <span id="datum">Lädt...</span>
+                    <span id="uhrzeit">--:--</span>
                 </div>
-                <!-- Einstellungen Inhalt -->
-                <div class="main-content">
-                    <!-- PROFIL -->
-                    <div class="tab-content active" id="profile">
-                        <div class="setting-group">
-                            <h3>Persönliche Informationen</h3>
-                            <div class="setting-row">
-                                <div class="setting-info">
-                                    <div class="setting-label">Name</div>
-                                </div>
-                                <div class="setting-control">
-                                    <input type="text" class="input" value="Max Mustermann" id="userName">
-                                </div>
-                            </div>
-                            <div class="setting-row">
-                                <div class="setting-info">
-                                    <div class="setting-label">E-Mail Adresse</div>
-                                </div>
-                                <div class="setting-control">
-                                    <input type="email" class="input" value="max.mustermann@beispiel.de" id="userEmail">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="setting-group">
-                            <h3>Account Sicherheit</h3>
-                            <div class="setting-row">
-                                <div class="setting-info">
-                                    <div class="setting-label">Passwort ändern</div>
-                                    <div class="setting-description">Letztes Update vor 3 Monaten</div>
-                                </div>
-                                <div class="setting-control">
-                                    <button class="btn btn-primary">Ändern</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="setting-group">
-                            <h3>Sprache & Region</h3>
-                            <div class="setting-row">
-                                <div class="setting-info">
-                                    <div class="setting-label">Sprache der Benutzeroberfläche</div>
-                                </div>
-                                <div class="setting-control">
-                                    <select class="select" id="language">
-                                        <option value="de">Deutsch</option>
-                                        <option value="en">English</option>
-                                    </select>
-                                </div>
-                            </div>
+                <button class="theme-toggle" id="themeToggle">
+                    <div class="theme-icon"></div>
+                </button>
+            </div>
+        </header>
+
+        <!-- Content Area -->
+        <div class="content">
+            <!-- Allgemein Section -->
+            <div class="settings-card">
+                <h2>Allgemein</h2>
+
+                <!-- Persönliche Informationen -->
+                <div class="settings-section">
+                    <h3>Persönliche Informationen</h3>
+                    
+                    <div class="settings-group">
+                        <label>Name</label>
+                        <input type="text" value="Max Mustermann" disabled>
+                    </div>
+
+                    <div class="settings-group">
+                        <label>E-Mail Adresse</label>
+                        <input type="email" value="max.mustermann@beispiel.de" disabled>
+                    </div>
+                </div>
+
+                <!-- Account Sicherheit -->
+                <div class="settings-section">
+                    <h3>Account Sicherheit</h3>
+                    
+                    <div class="settings-group">
+                        <label>Passwort ändern</label>
+                        <div class="password-info">
+                            <span>Letztes Update vor 3 Monaten</span>
+                            <button class="btn-primary" id="changePasswordBtn">Ändern</button>
                         </div>
                     </div>
-                    <!-- DARSTELLUNG -->
-                    <div class="tab-content" id="display">
-                        <div class="setting-group">
-                            <h3>Erscheinungsbild</h3>
-                            <div class="setting-row">
-                                <div class="setting-info">
-                                    <div class="setting-label">Theme</div>
-                                </div>
-                                <div class="setting-control">
-                                    <select class="select" id="theme">
-                                        <option value="light">Hell</option>
-                                        <option value="dark">Dunkel</option>
-                                        <option value="auto">Automatisch</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="setting-row">
-                                <div class="setting-info">
-                                    <div class="setting-label">Schriftgröße</div>
-                                </div>
-                                <div class="setting-control">
-                                    <select class="select" id="fontSize">
-                                        <option value="small">Klein</option>
-                                        <option value="medium" selected>Mittel</option>
-                                        <option value="large">Groß</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="setting-group">
-                            <h3>Listenansicht</h3>
-                            <div class="setting-row">
-                                <div class="setting-info">
-                                    <div class="setting-label">Einträge pro Seite</div>
-                                </div>
-                                <div class="setting-control">
-                                    <select class="select" id="entriesPerPage">
-                                        <option value="10">10</option>
-                                        <option value="20" selected>20</option>
-                                        <option value="50">50</option>
-                                        <option value="100">100</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="setting-row">
-                                <div class="setting-info">
-                                    <div class="setting-label">Standard-Ansicht beim Login</div>
-                                </div>
-                                <div class="setting-control">
-                                    <select class="select" id="defaultView">
-                                        <option value="dashboard" selected>Dashboard</option>
-                                        <option value="courses">Kursliste</option>
-                                        <option value="calendar">Kalender</option>
-                                        <option value="personal">Persönliche Ansicht</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="setting-group">
-                            <h3>Zeit & Datum</h3>
-                            <div class="setting-row">
-                                <div class="setting-info">
-                                    <div class="setting-label">Häufigkeit der Erinnerungen</div>
-                                </div>
-                                <div class="setting-control">
-                                    <select class="select" id="reminderFrequency">
-                                        <option value="daily" selected>Täglich</option>
-                                        <option value="weekly">Wöchentlich</option>
-                                        <option value="monthly">Monatlich</option>
-                                    </select>
-                                </div>
-                            </div>
+                </div>
+
+                <!-- Barrierefreiheit -->
+                <div class="settings-section">
+                    <h3>Barrierefreiheit</h3>
+                    
+                    <div class="settings-group">
+                        <label>Schriftgröße</label>
+                        <div class="font-size-options">
+                            <button class="font-size-btn" data-size="small">Klein</button>
+                            <button class="font-size-btn active" data-size="medium">Mittel</button>
+                            <button class="font-size-btn" data-size="large">Groß</button>
                         </div>
                     </div>
-                    <!-- Die weiteren Tabs (analog zu deinem alten Code) ... -->
-                    <!-- Benachrichtigungen, Datenschutz, Filter & Standards, Export & Backup -->
-                    <!-- (Baue hier deine bisherigen Einstellungen analog ein) -->
-                    <div class="save-section">
-                        <button class="btn btn-secondary">Zurücksetzen</button>
-                        <button class="btn btn-primary">Änderungen speichern</button>
+                </div>
+
+                <!-- Benachrichtigungen -->
+                <div class="settings-section">
+                    <h3>Benachrichtigungen</h3>
+                    
+                    <div class="settings-group">
+                        <div class="toggle-row">
+                            <div>
+                                <label>Benachrichtigungs-Symbol anzeigen</label>
+                                <p class="toggle-description">Zeigt die Glocke im Header an</p>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="showNotificationIcon" checked>
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
                     </div>
+                </div>
+
+                <!-- Sprache & Region -->
+                <div class="settings-section">
+                    <h3>Sprache & Region</h3>
+                    
+                    <div class="settings-group">
+                        <label>Sprache der Benutzeroberfläche</label>
+                        <select id="languageSelect">
+                            <option value="de" selected>🇩🇪 Deutsch</option>
+                            <option value="en">🇬🇧 English</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="settings-actions">
+                    <button class="btn-secondary" id="resetBtn">Zurücksetzen</button>
+                    <button class="btn-primary" id="saveBtn">Änderungen speichern</button>
                 </div>
             </div>
         </div>
     </div>
- 
-</body>
 
+    <!-- Modal für Passwort ändern -->
+    <div class="modal" id="passwordModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Passwort ändern</h3>
+                <button class="modal-close" id="closePasswordModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Aktuelles Passwort</label>
+                    <input type="password" id="currentPassword" placeholder="Aktuelles Passwort eingeben">
+                </div>
+                <div class="form-group">
+                    <label>Neues Passwort</label>
+                    <input type="password" id="newPassword" placeholder="Neues Passwort eingeben">
+                </div>
+                <div class="form-group">
+                    <label>Neues Passwort bestätigen</label>
+                    <input type="password" id="confirmPassword" placeholder="Neues Passwort wiederholen">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary" id="cancelPasswordBtn">Abbrechen</button>
+                <button class="btn-primary" id="savePasswordBtn">Passwort ändern</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="einstellung.js"></script>
+</body>
 </html>
