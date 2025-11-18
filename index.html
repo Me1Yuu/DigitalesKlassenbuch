@@ -3,69 +3,84 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Digitales Klassenbuch</title>
+    <title>Digitales Klassenbuch - Startseite</title>
     <link rel="stylesheet" href="index.css">
 </head>
 
 <body>
+    <!-- Sidebar Navigation -->
     <div class="sidebar">
         <div class="logo">
-            <img src="lug logo.png" alt="" class="logo-icon">
+            <img src="lug logo.png" alt="LUG Logo" class="logo-icon">
             <div class="logo-text">Digitales<br>Klassenbuch</div>
         </div>
+        
         <div class="nav-items">
-            <a href="index.html" class="nav-item">
-                <div class="nav-icon"></div>
+            <a href="index.html" class="nav-item active">
+                <div class="nav-icon nav-icon-home"></div>
                 <span>Startseite</span>
             </a>
-             <a href="profil.html" class="nav-item active">
-                <div class="nav-icon"></div>
+            
+            <a href="profil.html" class="nav-item">
+                <div class="nav-icon nav-icon-profil"></div>
                 <span>Profil</span>
             </a>
-             <a href="verwaltung.html" class="nav-item active">
-                <div class="nav-icon"></div>
+            
+            <a href="verwaltung.html" class="nav-item">
+                <div class="nav-icon nav-icon-verwaltung"></div>
                 <span>Verwaltung</span>
             </a>
-            <div class="nav-item">
-                <div class="nav-icon"></div>
+            
+            <a href="eintrag.html" class="nav-item">
+                <div class="nav-icon nav-icon-eintrag"></div>
                 <span>Eintrag</span>
-            </div>
-            <div class="nav-item">
-                <div class="nav-icon"></div>
+            </a>
+            
+            <a href="kalender.html" class="nav-item">
+                <div class="nav-icon nav-icon-kalender"></div>
                 <span>Kalender</span>
-            </div>
+            </a>
+            
             <a href="einstellung.html" class="nav-item">
-                <div class="nav-icon"></div>
+                <div class="nav-icon nav-icon-einstellungen"></div>
                 <span>Einstellungen</span>
             </a>
         </div>
+        
         <div class="logout">
-            <div class="nav-icon"></div>
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                <polyline points="16 17 21 12 16 7"></polyline>
+                <line x1="21" y1="12" x2="9" y2="12"></line>
+            </svg>
             <span>Ausloggen</span>
         </div>
     </div>
 
+    <!-- Hauptbereich -->
     <div class="main-content">
+        <!-- Header mit Datum, Uhrzeit und Dark Mode -->
         <div class="header">
-            <div class="date-time"></div>
-            <div class="date-time"></div>
-            <div class="sun-icon"></div>
+            <div class="date-time" id="datum"></div>
+            <div class="date-time" id="uhrzeit"></div>
+            <div class="sun-icon" title="Dark/Light Mode umschalten"></div>
         </div>
 
         <div class="content-area">
+            <!-- Benutzerinformationen -->
             <div class="user-info">
                 <div class="user-left">
-                    <div class="user-avatar">MM</div>
-                    <div class="user-name">Max Mustermann</div>
+                    <a href="profil.html" class="user-avatar" title="Zum Profil">MM</a>
+                    <a href="profil.html" class="user-name">Max Mustermann</a>
                     <div class="user-role">AE / SI Trainer</div>
 
-                    <!-- Erinnerung AN oder AUS -->
+                    <!-- Erinnerungsstatus -->
                     <div class="status">
                         <div class="status-indicator"></div>
                         <span>AUS</span>
                     </div>
-                     
                 </div>
+                
                 <div class="user-right">
                     <div class="info-sections">
                         <div class="info-section">
@@ -100,18 +115,21 @@
                 </div>
             </div>
 
+            <!-- Einträge Bereich -->
             <div class="entries-section">
+                <!-- Aktuelle Einträge -->
                 <div class="entries-container">
                     <div class="entries-title">Aktuelle Einträge</div>
+                    
                     <div class="entry-item">
-                        <div class="entry-avatar" style="background-color: #2196f3;">HH</div>
+                        <a href="profil.html?user=hh" class="entry-avatar" style="background-color: #2196f3;" title="Zum Profil von Coach">HH</a>
                         <div class="entry-content">
                             <div class="entry-header">
-                                <div class="entry-author">Coach</div>
+                                <a href="profil.html?user=hh" class="entry-author">Coach</a>
                                 <div class="entry-time">15:45 Uhr - 06.05.2025</div>
                             </div>
                             <div class="entry-text">
-                                Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum
+                                Heute haben wir die Grundlagen der Webentwicklung besprochen. Die Teilnehmer zeigten großes Interesse an HTML5 und CSS3.
                             </div>
                             <div class="entry-tags">
                                 <span class="entry-tag tag-ae">AE</span>
@@ -122,71 +140,93 @@
                     </div>
 
                     <div class="entry-item">
-                        <div class="entry-avatar" style="background-color: #8bc34a;"></div>
+                        <a href="profil.html?user=js" class="entry-avatar" style="background-color: #ff9800;" title="Zum Profil von SI Trainer">JS</a>
                         <div class="entry-content">
                             <div class="entry-header">
-                                <div class="entry-author">AE / SI Trainer</div>
-                                <div class="entry-time"></div>
+                                <a href="profil.html?user=js" class="entry-author">SI Trainer</a>
+                                <div class="entry-time">14:30 Uhr - 06.05.2025</div>
+                            </div>
+                            <div class="entry-text">
+                                Systemintegration: Installation und Konfiguration von Linux-Servern wurde erfolgreich durchgeführt.
+                            </div>
+                            <div class="entry-tags">
+                                <span class="entry-tag tag-si">SI</span>
+                                <span class="entry-tag tag-fi">FI 21-1</span>
                             </div>
                         </div>
                     </div>
 
                     <div class="entry-item">
-                        <div class="entry-avatar" style="background-color: #8bc34a;"></div>
+                        <a href="profil.html?user=lm" class="entry-avatar" style="background-color: #9c27b0;" title="Zum Profil von AE Trainer">LM</a>
                         <div class="entry-content">
                             <div class="entry-header">
-                                <div class="entry-author">SI Trainer</div>
-                                <div class="entry-time"></div>
+                                <a href="profil.html?user=lm" class="entry-author">AE Trainer</a>
+                                <div class="entry-time">13:15 Uhr - 06.05.2025</div>
+                            </div>
+                            <div class="entry-text">
+                                Datenbankdesign und SQL-Abfragen wurden intensiv geübt. Alle Teilnehmer konnten die Übungsaufgaben lösen.
+                            </div>
+                            <div class="entry-tags">
+                                <span class="entry-tag tag-ae">AE</span>
+                                <span class="entry-tag tag-db">Datenbanken</span>
                             </div>
                         </div>
                     </div>
 
                     <div class="entry-item">
-                        <div class="entry-avatar" style="background-color: #8bc34a;">MM</div>
+                        <a href="profil.html" class="entry-avatar" style="background-color: #8bc34a;" title="Zum eigenen Profil">MM</a>
                         <div class="entry-content">
                             <div class="entry-header">
-                                <div class="entry-author">AE / SI Trainer</div>
-                                <div class="entry-time">15:00 Uhr - 06.05.2025</div>
+                                <a href="profil.html" class="entry-author">Max Mustermann (Trainer)</a>
+                                <div class="entry-time">12:00 Uhr - 06.05.2025</div>
+                            </div>
+                            <div class="entry-text">
+                                Projektvorbesprechung mit FI 23-3. Themen für Abschlussprojekte wurden diskutiert und festgelegt.
+                            </div>
+                            <div class="entry-tags">
+                                <span class="entry-tag tag-fi">FI 23-3</span>
+                                <span class="entry-tag tag-projekt">Projekt</span>
                             </div>
                         </div>
                     </div>
                 </div>
 
+                <!-- Letzte Einträge Übersicht -->
                 <div class="entries-container">
-                    <div class="entries-title">Letzter Eintrag</div>
+                    <div class="entries-title">Letzte Einträge</div>
                     
                     <div class="last-entry-item">
-                        <div class="last-entry-avatar"></div>
+                        <a href="profil.html" class="last-entry-avatar" title="Zum Profil">MM</a>
                         <div class="last-entry-content">
-                            <div class="last-entry-name">Max Mustermann (Trainer)</div>
+                            <a href="profil.html" class="last-entry-name">Max Mustermann (Trainer)</a>
                             <div class="last-entry-course">FI 23-4<br>Netzwerke Grundlagen</div>
                         </div>
                         <div class="last-entry-time">05.05.2025<br>15:00 Uhr</div>
                     </div>
 
                     <div class="last-entry-item">
-                        <div class="last-entry-avatar"></div>
+                        <a href="profil.html?user=js" class="last-entry-avatar" style="background-color: #ff9800;" title="Zum Profil">JS</a>
                         <div class="last-entry-content">
-                            <div class="last-entry-name">Max Mustermann (Trainer)</div>
-                            <div class="last-entry-course">FI 23-4<br>Netzwerke Grundlagen</div>
+                            <a href="profil.html?user=js" class="last-entry-name">Julia Schmidt (SI Trainer)</a>
+                            <div class="last-entry-course">FI 21-1<br>Linux Administration</div>
                         </div>
                         <div class="last-entry-time">05.05.2025<br>12:21 Uhr</div>
                     </div>
 
                     <div class="last-entry-item">
-                        <div class="last-entry-avatar"></div>
+                        <a href="profil.html?user=hh" class="last-entry-avatar" style="background-color: #2196f3;" title="Zum Profil">HH</a>
                         <div class="last-entry-content">
-                            <div class="last-entry-name">Max Mustermann (Trainer)</div>
-                            <div class="last-entry-course">FI 23-4<br>Netzwerke Grundlagen</div>
+                            <a href="profil.html?user=hh" class="last-entry-name">Hans Hofmann (Coach)</a>
+                            <div class="last-entry-course">FI 23-3<br>JavaScript Vertiefung</div>
                         </div>
                         <div class="last-entry-time">04.05.2025<br>16:00 Uhr</div>
                     </div>
 
                     <div class="last-entry-item">
-                        <div class="last-entry-avatar"></div>
+                        <a href="profil.html?user=lm" class="last-entry-avatar" style="background-color: #9c27b0;" title="Zum Profil">LM</a>
                         <div class="last-entry-content">
-                            <div class="last-entry-name">Max Mustermann (Trainer)</div>
-                            <div class="last-entry-course">FI 23-4<br>Netzwerke Grundlagen</div>
+                            <a href="profil.html?user=lm" class="last-entry-name">Lisa Müller (AE Trainer)</a>
+                            <div class="last-entry-course">FI 21-1<br>SQL Advanced</div>
                         </div>
                         <div class="last-entry-time">03.05.2025<br>17:01 Uhr</div>
                     </div>
@@ -196,6 +236,5 @@
     </div>
 
     <script src="index.js"></script>
-
 </body>
 </html>
