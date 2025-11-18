@@ -1,56 +1,76 @@
-// --------------- Echtzeit Datum und Uhrzeit aktualisieren ---------------
-// Funktion zur Formatierung von Datum und Uhrzeit im deutschen Stil
+// ========================================
+// DIGITALES KLASSENBUCH - STARTSEITE
+// JavaScript Funktionalitäten
+// ========================================
+
+// ===== ECHTZEIT DATUM UND UHRZEIT =====
+/**
+ * Aktualisiert Datum und Uhrzeit in Echtzeit (jede Sekunde)
+ * Formatierung im deutschen Stil: DD.MM.YYYY und HH:MM:SS
+ */
 function aktualisiereDatumZeit() {
     const jetzt = new Date();
 
-    // Optionen für das Datum (Tag.Monat.Jahr)
-    const datumOptionen = { day: '2-digit', month: '2-digit', year: 'numeric' };
-    // Optionen für die Zeit (Stunden:Minuten)
-    const zeitOptionen = { hour: '2-digit', minute: '2-digit' };
+    // Datum formatieren (TT.MM.JJJJ)
+    const tag = String(jetzt.getDate()).padStart(2, '0');
+    const monat = String(jetzt.getMonth() + 1).padStart(2, '0');
+    const jahr = jetzt.getFullYear();
+    const datumStr = `${tag}.${monat}.${jahr}`;
 
-    // Formatiertes Datum und Zeit als Strings
-    const datumStr = jetzt.toLocaleDateString('de-DE', datumOptionen);
-    const zeitStr = jetzt.toLocaleTimeString('de-DE', zeitOptionen);
+    // Uhrzeit formatieren (HH:MM:SS)
+    const stunden = String(jetzt.getHours()).padStart(2, '0');
+    const minuten = String(jetzt.getMinutes()).padStart(2, '0');
+    const sekunden = String(jetzt.getSeconds()).padStart(2, '0');
+    const zeitStr = `${stunden}:${minuten}:${sekunden}`;
 
-    // Datum-Elemente im Header (angenommen, sieht man z.B. an class="date-time")
-    // Wir gehen davon aus, dass das erste Datum-Element Datum ist, zweites Zeit
-    const dateTimeEls = document.querySelectorAll('.date-time');
-    if (dateTimeEls.length >= 2) {
-        dateTimeEls[0].textContent = datumStr;
-        dateTimeEls[1].textContent = zeitStr;
-    }
+    // DOM-Elemente aktualisieren
+    const datumEl = document.getElementById('datum');
+    const uhrzeitEl = document.getElementById('uhrzeit');
+    
+    if (datumEl) datumEl.textContent = datumStr;
+    if (uhrzeitEl) uhrzeitEl.textContent = zeitStr;
 }
 
-// Alle 1 Minute die Datum- und Uhrzeit-Funktion aufrufen, um aktuell zu bleiben
-setInterval(aktualisiereDatumZeit, 60000);
-// Einmal sofort aufrufen, damit es direkt angezeigt wird
+// Initialer Aufruf und Update alle 1 Sekunde für Echtzeit
 aktualisiereDatumZeit();
+setInterval(aktualisiereDatumZeit, 1000);
 
 
-// --------------- Darkmode Funktion ---------------
-// Wir nehmen an, du hast im HTML das .sun-icon für den Dark/Light Mode Toggle
+// ===== DARK MODE TOGGLE =====
+/**
+ * Wechselt zwischen hellem und dunklem Design
+ * Speichert Präferenz im localStorage
+ */
 const sunIcon = document.querySelector('.sun-icon');
 
-// Prüfe, ob das Element vorhanden ist
 if (sunIcon) {
-    sunIcon.style.cursor = 'pointer'; // Zeigt Hand-Cursor an, weil klickbar
+    sunIcon.style.cursor = 'pointer';
 
-    // Funktion zum Umschalten des Darkmodes
-    function toggleDarkMode() {
-        document.body.classList.toggle('dark-mode');
-        // Optional: Icon-Status ändern, z.B. Farbe oder Form (hier nur Farbe als Beispiel)
-        if (document.body.classList.contains('dark-mode')) {
-            sunIcon.style.backgroundColor = '#555'; // Dunkler Hintergrund im Darkmode
-            sunIcon.style.setProperty('--icon-color', '#ffd93d'); // helle Farbe (falls benutzt)
-        } else {
-            sunIcon.style.backgroundColor = '#ffd93d'; // Original Gelb im Lightmode
-            sunIcon.style.removeProperty('--icon-color');
+    // Dark Mode Zustand laden
+    function ladeDarkModeStatus() {
+        const istDarkMode = localStorage.getItem('darkMode') === 'true';
+        if (istDarkMode) {
+            document.body.classList.add('dark-mode');
         }
     }
 
-    // Klick-Handler registrieren
+    // Dark Mode umschalten
+    function toggleDarkMode() {
+        const body = document.body;
+        body.classList.toggle('dark-mode');
+        
+        // Status speichern
+        const istDarkMode = body.classList.contains('dark-mode');
+        localStorage.setItem('darkMode', istDarkMode);
+    }
+
+    // Event Listener
     sunIcon.addEventListener('click', toggleDarkMode);
+    
+    // Initial laden
+    ladeDarkModeStatus();
 }
+
 
 // ------------ Erinnerung mit mehrstufigem Modal ------------
 
@@ -77,10 +97,12 @@ if (erinnerungStatus && statusIndicator) {
 
         // Modal Content Box
         let modalContent = document.createElement('div');
-        modalContent.style.background = '#fff';
+        modalContent.style.background = document.body.classList.contains('dark-mode') ? '#2a2a2a' : '#fff';
+        modalContent.style.color = document.body.classList.contains('dark-mode') ? '#f5f5f5' : '#333';
         modalContent.style.padding = '20px';
         modalContent.style.borderRadius = '8px';
-        modalContent.style.minWidth = '300px';
+        modalContent.style.minWidth = '350px';
+        modalContent.style.maxWidth = '500px';
         modalContent.innerHTML = htmlInhalt;
 
         modal.appendChild(modalContent);
@@ -116,9 +138,23 @@ if (erinnerungStatus && statusIndicator) {
                 <button class="btn-cancel">Nein</button>
             `, () => {
 
+                 // Heutiges Datum als Standard
+                const heute = new Date();
+                const heuteDatum = heute.toISOString().split('T')[0];
+
                 // Schritt 2: Uhrzeit & Mail Einstellung abfragen
                 zeigeModalInhalt(`
                     <h3>Erinnerungszeit & E-Mail</h3>
+                       <label style="display: block; margin-bottom: 15px;">
+                        <strong>Datum:</strong><br>
+                        <input type="date" class="reminder-date" value="${heuteDatum}" required 
+                               style="width: 100%; padding: 10px; margin-top: 5px; border: 1px solid #ddd; border-radius: 6px; font-size: 14px;" />
+                    </label>
+                    <label style="display: block; margin-bottom: 15px;">
+                        <strong>Wofür möchten Sie erinnert werden? (optional)</strong><br>
+                        <textarea class="reminder-text" placeholder="z.B. Tagesbericht ausfüllen" rows="3" 
+                                  style="width: 100%; padding: 10px; margin-top: 5px; border: 1px solid #ddd; border-radius: 6px; font-size: 14px; resize: vertical; font-family: inherit;"></textarea>
+                    </label>
                     <label>
                         Uhrzeit für Erinnerung:
                         <input type="time" class="reminder-time" value="18:00" required />
@@ -132,20 +168,35 @@ if (erinnerungStatus && statusIndicator) {
                     <button class="btn-confirm">Speichern</button>
                     <button class="btn-cancel">Abbrechen</button>
                 `, (modalContent) => {
+                    const dateInput = modalContent.querySelector('.reminder-date').value;
                     const timeInput = modalContent.querySelector('.reminder-time').value;
+                    const textInput = modalContent.querySelector('.reminder-text').value.trim();  
                     const emailChecked = modalContent.querySelector('.reminder-email').checked;
 
-                    // Speichern (z.B. lokal)
+                    // Speichern
                     localStorage.setItem('erinnerungAn', 'true');
+                    localStorage.setItem('erinnerungDatum', dateInput);
                     localStorage.setItem('erinnerungsZeit', timeInput);
+                    localStorage.setItem('erinnerungText', textInput);
                     localStorage.setItem('erinnerungEmail', emailChecked ? 'true' : 'false');
 
                     // Status aktualisieren
                     erinnerungStatus.textContent = 'AN';
                     statusIndicator.style.backgroundColor = '#4caf50';
 
-                    alert(`Erinnerung aktiviert um ${timeInput} Uhr${emailChecked ? ' mit E-Mail' : ''}.`);
+                     const datumTeile = dateInput.split('-');
+                    const formatiertesDatum = `${datumTeile[2]}.${datumTeile[1]}.${datumTeile[0]}`;
 
+                     // Alert-Text zusammenbauen
+                    let alertText = `Erinnerung aktiviert für ${formatiertesDatum} um ${timeInput} Uhr`;
+                    if (textInput) {
+                        alertText += `\n\nWofür: ${textInput}`;
+                    }
+                    if (emailChecked) {
+                        alertText += '\n\n✉️ E-Mail-Benachrichtigung aktiviert';
+                    }
+
+                    alert(alertText);
                     // Hier kannst du weitere Logik starten (Notification-API, Backend-Call, ...)
                 });
             });
@@ -174,6 +225,28 @@ if (erinnerungStatus && statusIndicator) {
     });
 }
 
+//DAS LIEGT BEREITS IN DER VERGANGENHEIT - FUNKTION einbauen) 
+
+// ===== LOGOUT BESTÄTIGUNG =====
+/**
+ * Zeigt Bestätigung beim Ausloggen
+ */
+const logoutBtn = document.querySelector('.logout');
+if (logoutBtn) {
+    logoutBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const bestaetigung = confirm('Möchten Sie sich wirklich ausloggen?');
+        if (bestaetigung) {
+            // Hier würde normalerweise die Logout-Logik folgen
+            alert('Logout erfolgreich!');
+            // window.location.href = 'login.html';
+        }
+    });
+}
 
 
-//local storage hinzufügen, damiit es beim reload auch im darkmode erhalten bleibt//
+// ===== CONSOLE LOG FÜR ENTWICKLUNG =====
+console.log('✅ Digitales Klassenbuch - Startseite geladen');
+console.log('📅 Datum/Uhrzeit: Echtzeit aktiv');
+console.log('🌓 Dark Mode: ' + (localStorage.getItem('darkMode') === 'true' ? 'AN' : 'AUS'));
+console.log('🔔 Erinnerungen: ' + (localStorage.getItem('erinnerungAn') === 'true' ? 'AN' : 'AUS'));
